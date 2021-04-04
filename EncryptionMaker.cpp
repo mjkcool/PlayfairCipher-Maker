@@ -9,7 +9,7 @@ using namespace std;
 //─ │ ┌ ┐ ┘ └ ├ ┬ ┤ ┴ ┼ ━ ┃ ┏ ┓ ┛ ┗ ┣ ┳ ┫ ┻ ╋ ┠ ┯ ┨ ┷ ┿ ┝ ┰ ┥ ┸ ╂ ┒ ┑ ┚ ┙ ┖ ┕ ┎ ┍ ┞ ┟ ┡ ┢ ┦ ┧ ┩ ┪ ┭ ┮ ┱ ┲ ┵ ┶ ┹ ┺ ┽ ┾ ╀ ╁ ╃ ╄ ╅ ╆ ╇ ╈ ╉ ╊
 //Alphabet ASCII 65~90
 
-void eraseSpace(char* key) {
+void eraseSpace(char* key) { //입력받은 문장의 공백을 제거
 	int i, index = 0;
 
 	for (i = 0; key[i] != 0; i++) {
@@ -18,25 +18,25 @@ void eraseSpace(char* key) {
 			index++;
 		}
 	}
-	key[index] = 0;
+	key[index] = 0; //배열 종료
 }
 
 
-void encryption() {
-	char key[ARRAY];
-	char* raw_key;
-	char keyboard[KBSIZE][KBSIZE];
+void encryption() { //암호화 수행 함수
+	char key[ARRAY]; //사용될 암호키
+	char* raw_key; //암호키 원문
+	char keyboard[KBSIZE][KBSIZE]; //암호판
 
 	std::cout << "\n┏━━━━ Processing... ━━━━ Encryption ━━━━┓\n┃\n";
 	std::cout << "┣━■ Enter your Cipher key\n(*Only in Eng, till " << ARRAY - 1 << " letter include spaces)\n : ";
-	std::cin.ignore();
-	std::cin.getline(key, ARRAY);
+	std::cin.ignore(); 
+	std::cin.getline(key, ARRAY); //암호키 입력
 	int len = std::strlen(key);
 	raw_key = new char[len + 1];
 	strcpy_s(raw_key, len + 1, key);
 
-	eraseSpace(key);
-	len = std::strlen(key);
+	eraseSpace(key); //공백 제거
+	len = std::strlen(key); 
 
 	int i, j, keyidx;
 	//Make to uppercase all
@@ -51,9 +51,13 @@ void encryption() {
 			if (keyidx < len) keyboard[i][j] = (char)toupper(key[keyidx++]);
 			else {
 				//if Q and Z, I and J
-				//if alpbt in key: ++
-				keyboard[i][j] = (char)alpbt++;
+				if (alpbt == 81 || alpbt == 90) {
 
+				}
+				//if alpbt in key: ++
+				
+				keyboard[i][j] = (char)alpbt++;
+				
 			}
 		}
 	}
@@ -64,7 +68,7 @@ void encryption() {
 	return;
 }
 
-void decryption() {
+void decryption() { //복호화 수행 함수
 
 	return;
 }
