@@ -42,8 +42,8 @@ void removeDupplication(char* str) {
 	str[i] = 0;
 }
 
-void separateToPlayfair(char* str) {
-
+void makeBoard(char* board) {
+	//https://dojang.io/mod/page/view.php?id=312
 }
 
 void encryption() { //암호화 수행 함수
@@ -130,8 +130,8 @@ void encryption() { //암호화 수행 함수
 	}
 
 	
+	std::cout << "\nEnter your plain text\n(*Only in Eng, till " << ARRAY - 1 << " letter include spaces)\n : ";
 	std::cin.ignore();
-	std::cout << "Enter your plain text\n(*Only in Eng, till " << ARRAY - 1 << " letter include spaces)\n : \n";
 	std::cin.getline(plaintxt, ARRAY);
 	//암호화
 	int txtidx;
@@ -139,8 +139,7 @@ void encryption() { //암호화 수행 함수
 		plaintxt[txtidx] = (char)toupper(plaintxt[txtidx]);
 	}
 	removeSpace(plaintxt);//공백제거
-	separateToPlayfair(plaintxt);
-	
+
 
 	
 
