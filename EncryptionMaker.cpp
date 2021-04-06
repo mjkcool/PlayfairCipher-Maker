@@ -42,6 +42,10 @@ void removeDupplication(char* str) {
 	str[i] = 0;
 }
 
+void processForPlainTxt(char *str) {
+
+}
+
 void makeBoard(char board[][KBSIZE], char* key, int* len) {
 	int i = 0; int j = 0; bool qzexist = false; //Q or Z
 	int keyidx;
@@ -155,6 +159,7 @@ void encryption() { //암호화 수행 함수
 		plaintxt[txtidx] = (char)toupper(plaintxt[txtidx]);
 	}
 	removeSpace(plaintxt);//공백제거
+	processForPlainTxt(plaintxt); //중복문자&홀수종료 뒤 X 대입
 	
 	string ciphertxt; //암호문
 	int fair_i = 0;
@@ -194,6 +199,7 @@ void encryption() { //암호화 수행 함수
 		fair_i+=2;
 	}
 	
+	std::cout << plaintxt;
 
 
 	std::cin.clear();
