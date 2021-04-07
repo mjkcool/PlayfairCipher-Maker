@@ -43,7 +43,27 @@ void removeDupplication(char* str) {
 }
 
 void processForPlainTxt(char *str) {
+	int i, newi = 0;
+	char newstr[ARRAY];
+	
+	newstr[0] = str[newi++];
+	for (i = 1; str[i] != 0; i++) {
+		if (str[i-1] == str[i]) {
+			newstr[newi++] = 'X';
+		}
+		newstr[newi++] = str[i];
+	}
+	//홀수면 끝에 'X' 대입
+	if (std::strlen(newstr)%2==1) {
+		newstr[newi++] = 'X';
+	}
+	newstr[newi] = 0; //종료
+	
 
+	//복사
+	for (i = 0; newstr[i] != 0; i++) {
+		str[i] = newstr[i]; //복사~!
+	}
 }
 
 void makeBoard(char board[][KBSIZE], char* key, int* len) {
@@ -158,9 +178,18 @@ void encryption() { //암호화 수행 함수
 	for (txtidx = 0; txtidx < len; txtidx++) { //평문을 대문자로 변환
 		plaintxt[txtidx] = (char)toupper(plaintxt[txtidx]);
 	}
+
+	int idx;
+	//대문자변환
+	for (idx = 0; idx < len; idx++) {
+		plaintxt[idx] = (char)toupper(plaintxt[idx]);
+	}
+
 	removeSpace(plaintxt);//공백제거
 	processForPlainTxt(plaintxt); //중복문자&홀수종료 뒤 X 대입
 	
+	
+	/*
 	string ciphertxt; //암호문
 	int fair_i = 0;
 	int r_l = -1, c_l = -1;
@@ -198,9 +227,9 @@ void encryption() { //암호화 수행 함수
 
 		fair_i+=2;
 	}
-	
+	*/
 	std::cout << plaintxt;
-
+	
 
 	std::cin.clear();
 	return;
