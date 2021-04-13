@@ -21,7 +21,7 @@ void removeSpace(char* str) { //입력받은 문장의 공백을 제거
 		}
 	}
 	str[index] = 0; //배열 종료
-	
+
 }
 
 void removeDupplication(char* str) {
@@ -42,9 +42,36 @@ void removeDupplication(char* str) {
 	str[i] = 0;
 }
 
-void processForPlainTxt(char *str) {
-	std::cout << "\nprocessForPlainTxt: " << str;
-	
+void processForPlainTxt(char* str) {
+	int i, newi = 0;
+	char newstr[ARRAY]; //중복문자 처리된 문자열 복사용
+
+	newstr[0] = str[newi++];
+	for (i = 1; str[i] != 0; i++) {
+		if (str[i - 1] == str[i] && i % 2 == 1) {
+			newstr[newi++] = 'X';
+		}
+		newstr[newi++] = str[i];
+	}
+	if (newi % 2 == 1) { //홀수자일시 마지막에 x대입
+		newstr[newi++] = 'X';
+	}
+	newstr[newi++] = 0; //종료
+
+	//복사
+	for (i = 0; newstr[i] != 0; i++) {
+		str[i] = newstr[i]; //복사~!
+	}
+	str[i] = 0;
+
+
+	//출력
+	for (int k = 0; str[k] != 0; k++) {
+		if (k % 2 == 0) std::cout << " " << str[k];
+		else std::cout << str[k];
+	}
+
+
 }
 
 void makeBoard(char board[][KBSIZE], char* key, int* len) {
@@ -108,7 +135,7 @@ void makeBoard(char board[][KBSIZE], char* key, int* len) {
 	}
 }
 
- void getIndex(char board[][KBSIZE], char c, int* row, int* col) {
+void getIndex(char board[][KBSIZE], char c, int* row, int* col) {
 	for (int i = 0; i < KBSIZE; i++) {
 		for (int j = 0; j < KBSIZE; j++) {
 			if (board[i][j] == c) {
@@ -124,14 +151,14 @@ void encryption() { //암호화 수행 함수
 	char plaintxt[ARRAY]; //평문
 	char keyboard[KBSIZE][KBSIZE]; //암호판
 	char(*keyboardPtr)[5] = keyboard; //암호판 포인터
-	
+
 
 	std::cout << "\n━━━━ Processing... ━━━━ Encryption ━━━━━\n\n";
 	std::cout << "Enter your Cipher key\n(*Only in Eng, till " << ARRAY - 1 << " letter include spaces)\n : ";
-	std::cin.ignore(); 
+	std::cin.ignore();
 	std::cin.getline(key, ARRAY); //암호키 입력
 	int len = std::strlen(key);
-	raw_key = new char[len+1];
+	raw_key = new char[len + 1];
 	strcpy_s(raw_key, len + 1, key);
 
 	int i, j, keyidx;
@@ -144,10 +171,10 @@ void encryption() { //암호화 수행 함수
 	removeDupplication(key);
 	len = std::strlen(key);
 	int* lenPtr = &len;
-	
+
 	//암호판 제작
 	makeBoard(keyboardPtr, key, lenPtr);
-	
+
 	//평문 입력
 	std::cout << "\nEnter your plain text\n(*Only in Eng, till " << ARRAY - 1 << " letter include spaces)\n : ";
 	//std::cin.ignore();
@@ -160,10 +187,19 @@ void encryption() { //암호화 수행 함수
 	for (txtidx = 0; txtidx < plain_len; txtidx++) { //평문을 대문자로 변환
 		plaintxt[txtidx] = (char)toupper(plaintxt[txtidx]);
 	}
+
+	int idx;
+	//대문자변환
+	for (idx = 0; idx < len; idx++) {
+		plaintxt[idx] = (char)toupper(plaintxt[idx]);
+	}
+
 	removeSpace(plaintxt);//공백제거
 	processForPlainTxt(plaintxt); //중복문자&홀수종료 뒤 X 대입
 
-	
+	std::cout << "\n" << plaintxt;
+
+	/*
 	string ciphertxt; //암호문
 	int fair_i = 0;
 	int r_l = -1, c_l = -1;
@@ -201,7 +237,7 @@ void encryption() { //암호화 수행 함수
 
 		fair_i+=2;
 	}
-
+	*/
 
 	std::cin.clear();
 	return;
