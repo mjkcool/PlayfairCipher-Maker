@@ -74,6 +74,12 @@ void processForPlainTxt(char* str) {
 
 }
 
+	//복사
+	for (i = 0; newstr[i] != 0; i++) {
+		str[i] = newstr[i]; //복사~!
+	}
+}
+
 void makeBoard(char board[][KBSIZE], char* key, int* len) {
 	int i = 0; int j = 0; bool qzexist = false; //Q or Z
 	int keyidx;
