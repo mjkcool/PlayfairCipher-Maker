@@ -43,7 +43,8 @@ void removeDupplication(char* str) {
 }
 
 void processForPlainTxt(char *str) {
-
+	std::cout << "\nprocessForPlainTxt: " << str;
+	
 }
 
 void makeBoard(char board[][KBSIZE], char* key, int* len) {
@@ -149,17 +150,19 @@ void encryption() { //암호화 수행 함수
 	
 	//평문 입력
 	std::cout << "\nEnter your plain text\n(*Only in Eng, till " << ARRAY - 1 << " letter include spaces)\n : ";
-	std::cin.ignore();
+	//std::cin.ignore();
 	std::cin.getline(plaintxt, ARRAY);
 
+	int plain_len = std::strlen(plaintxt);
+	int* plain_lenPtr = &plain_len;
 
-	//암호화
 	int txtidx;
-	for (txtidx = 0; txtidx < len; txtidx++) { //평문을 대문자로 변환
+	for (txtidx = 0; txtidx < plain_len; txtidx++) { //평문을 대문자로 변환
 		plaintxt[txtidx] = (char)toupper(plaintxt[txtidx]);
 	}
 	removeSpace(plaintxt);//공백제거
 	processForPlainTxt(plaintxt); //중복문자&홀수종료 뒤 X 대입
+
 	
 	string ciphertxt; //암호문
 	int fair_i = 0;
@@ -198,8 +201,6 @@ void encryption() { //암호화 수행 함수
 
 		fair_i+=2;
 	}
-	
-	std::cout << plaintxt;
 
 
 	std::cin.clear();
